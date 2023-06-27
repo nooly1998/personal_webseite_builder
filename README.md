@@ -1,6 +1,6 @@
-# flutter_rust_bridge_template
+# dependencies
 
-This repository serves as a template for Flutter projects calling into native Rust
+This repository base on flutter_rust_bridge_template
 libraries via `flutter_rust_bridge`.
 
 ## Getting Started
@@ -27,14 +27,19 @@ Then go ahead and run `flutter run` (for web, run `dart run flutter_rust_bridge:
 
 Once you have edited `api.rs` to incorporate your own Rust code, the bridge files `bridge_definitions.dart` and `bridge_generated.dart` are generated using the following command (note: append ` --wasm` to add web support):
 
-### Windows
+### Windows Native
 ```
-flutter_rust_bridge_codegen --rust-input native\src\api.rs --dart-output .\lib\bridge_generated.dart --dart-decl-output .\lib\bridge_definitions.dart
+flutter run
 ```
 
-### Linux/MacOS/any other Unix
+### Linux/MacOS/any other Unix Native
 ```
-flutter_rust_bridge_codegen --rust-input native/src/api.rs --dart-output ./lib/bridge_generated.dart --dart-decl-output ./lib/bridge_definitions.dart
+flutter run
+```
+
+### Web
+```
+dart run flutter_rust_bridge:serve
 ```
 
 ## Scaffolding in existing projects
