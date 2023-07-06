@@ -37,6 +37,7 @@ dependencies:
   ffi: ^2.0.2
   flutter_rust_bridge: ^1.45.0
   meta: ^1.8.0
+  shelf_proxy: ^1.0.4
 
 dev_dependencies:
   flutter_test:

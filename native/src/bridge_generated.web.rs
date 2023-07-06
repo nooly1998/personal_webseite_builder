@@ -16,6 +16,11 @@ pub fn wire_hello(port_: MessagePort) {
     wire_hello_impl(port_)
 }
 
+#[wasm_bindgen]
+pub fn wire_personal_file(port_: MessagePort) {
+    wire_personal_file_impl(port_)
+}
+
 // Section: allocate functions
 
 // Section: related functions

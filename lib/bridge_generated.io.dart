@@ -158,6 +158,20 @@ class NativeWire implements FlutterRustBridgeWireBase {
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>('wire_hello');
   late final _wire_hello = _wire_helloPtr.asFunction<void Function(int)>();
 
+  void wire_personal_file(
+    int port_,
+  ) {
+    return _wire_personal_file(
+      port_,
+    );
+  }
+
+  late final _wire_personal_filePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'wire_personal_file');
+  late final _wire_personal_file =
+      _wire_personal_filePtr.asFunction<void Function(int)>();
+
   void free_WireSyncReturn(
     WireSyncReturn ptr,
   ) {

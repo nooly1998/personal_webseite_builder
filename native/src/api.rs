@@ -1,7 +1,7 @@
 // This is the entry point of your Rust library.
 // When adding new code to your project, note that only items used
 // here will be transformed to their Dart equivalents.
-
+use crate::core::file_storage::FileStorage;
 // A plain enum without any fields. This is similar to Dart- or C-style enums.
 // flutter_rust_bridge is capable of generating code for enums with fields
 // (@freezed classes in Dart and tagged unions in C).
@@ -60,4 +60,10 @@ pub fn rust_release_mode() -> bool {
 
 pub fn hello() -> String {
     format!("hello, here are flutter-rust app!")
+}
+
+pub fn personal_file() -> Box<Vec<u8>> {
+    let mut storage = FileStorage::new();
+    storage.set_path("native/resource/个人简历202307.docx");
+    storage.read_file()
 }

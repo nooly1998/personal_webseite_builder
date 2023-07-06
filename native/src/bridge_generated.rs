@@ -51,6 +51,16 @@ fn wire_hello_impl(port_: MessagePort) {
         move || move |task_callback| Ok(hello()),
     )
 }
+fn wire_personal_file_impl(port_: MessagePort) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap(
+        WrapInfo {
+            debug_name: "personal_file",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || move |task_callback| Ok((*personal_file())),
+    )
+}
 // Section: wrapper structs
 
 // Section: static checks
