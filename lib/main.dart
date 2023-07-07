@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         // colorSchemeSeed: const Color.fromARGB(255, 42, 147, 196),
         // primarySwatch: Colors.blue,
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 42, 173, 196)),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 42, 173, 196)),
       ),
       home: const MyHomePage(title: 'XXH Builder'),
     );
@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       )
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
 
