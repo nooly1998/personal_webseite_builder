@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
-// import 'package:uuid/uuid.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class Native {
   Future<Platform> platform({dynamic hint});
@@ -22,10 +22,6 @@ abstract class Native {
   Future<String> hello({dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kHelloConstMeta;
-
-  Future<Uint8List> personalFile({dynamic hint});
-
-  FlutterRustBridgeTaskConstMeta get kPersonalFileConstMeta;
 }
 
 enum Platform {

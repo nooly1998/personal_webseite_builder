@@ -16,11 +16,6 @@ pub extern "C" fn wire_hello(port_: i64) {
     wire_hello_impl(port_)
 }
 
-#[no_mangle]
-pub extern "C" fn wire_personal_file(port_: i64) {
-    wire_personal_file_impl(port_)
-}
-
 // Section: allocate functions
 
 // Section: related functions

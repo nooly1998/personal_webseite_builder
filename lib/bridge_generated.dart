@@ -68,22 +68,6 @@ class NativeImpl implements Native {
         argNames: [],
       );
 
-  Future<Uint8List> personalFile({dynamic hint}) {
-    return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_personal_file(port_),
-      parseSuccessData: _wire2api_box_uint_8_list,
-      constMeta: kPersonalFileConstMeta,
-      argValues: [],
-      hint: hint,
-    ));
-  }
-
-  FlutterRustBridgeTaskConstMeta get kPersonalFileConstMeta =>
-      const FlutterRustBridgeTaskConstMeta(
-        debugName: "personal_file",
-        argNames: [],
-      );
-
   void dispose() {
     _platform.dispose();
   }
@@ -95,10 +79,6 @@ class NativeImpl implements Native {
 
   bool _wire2api_bool(dynamic raw) {
     return raw as bool;
-  }
-
-  Uint8List _wire2api_box_uint_8_list(dynamic raw) {
-    return raw as Uint8List;
   }
 
   int _wire2api_i32(dynamic raw) {
