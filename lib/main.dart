@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<bool> isRelease;
   late Future<String> hello;
   final PageController controller = PageController();
+  static int curpage = 0;
 
   @override
   void initState() {
@@ -84,118 +85,167 @@ class _MyHomePageState extends State<MyHomePage> {
             // the App.build method, and use it to set our appbar title.
             title: Text(widget.title),
           ),
-          body: SingleChildScrollView(
+          body: ListView(
             // body:
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
-            child: Column(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Invoke "debug painting" (press "p" in the console, choose the
-              // "Toggle Debug Paint" action from the Flutter Inspector in Android
-              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-              // to see the wireframe for each widget.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/computer-vision.png',
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Row(
-                  children: <Widget>[
-                    const Spacer(),
-                    const SelectionArea(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "承接跨平台Desktop程序设计开发: Qt, Flutter，Android, Web APP；\n调研项目：图形渲染，AI",
-                            style: TextStyle(fontSize: 22),
-                          ),
-                          Text(
-                            "邮箱：abir5mhwei@gmail.com",
-                            style: TextStyle(fontSize: 22),
-                          ),
-                          Text(
-                            "微信：wei1090498448",
-                            style: TextStyle(fontSize: 22),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    Column(
+            // Column is also a layout widget. It takes a list of children and
+            // arranges them vertically. By default, it sizes itself to fit its
+            // children horizontally, and tries to be as tall as its parent.
+            //
+            // Invoke "debug painting" (press "p" in the console, choose the
+            // "Toggle Debug Paint" action from the Flutter Inspector in Android
+            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+            // to see the wireframe for each widget.
+            //
+            // Column has various properties to control how it sizes itself and
+            // how it positions its children. Here we use mainAxisAlignment to
+            // center the children vertically; the main axis here is the vertical
+            // axis because Columns are vertical (the cross axis would be
+            // horizontal).
+            children: <Widget>[
+              Image.asset(
+                'assets/computer-vision.png',
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Row(
+                children: <Widget>[
+                  const Spacer(),
+                  const SelectionArea(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        const Text(
-                          "GitHub",
-                          style: TextStyle(fontSize: 28),
+                        Text(
+                          "承接跨平台Desktop程序设计开发: Qt, Flutter，Android, Web APP；\n调研项目：图形渲染，AI",
+                          style: TextStyle(fontSize: 22),
                         ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 22)),
-                          onPressed: () {
-                            launchURL(Uri(
-                              scheme: 'https',
-                              host: 'github.com',
-                              path: '/nooly1998/personal_webseite_builder/',
-                            ));
-                          },
-                          child: const Text("WebSite Builder Utils"),
+                        Text(
+                          "邮箱：abir5mhwei@gmail.com",
+                          style: TextStyle(fontSize: 22),
                         ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 22)),
-                          onPressed: () {
-                            launchURL(Uri(
-                              scheme: 'https',
-                              host: 'github.com',
-                              path: '/nooly1998/opengames_utils/',
-                            ));
-                          },
-                          child: const Text("Open Game Utils"),
-                        )
+                        Text(
+                          "微信：wei1090498448",
+                          style: TextStyle(fontSize: 22),
+                        ),
                       ],
                     ),
-                    const Spacer(),
-                  ],
-                ),
-                const SizedBox(height: 100),
-                SizedBox(
-                  height: 800,
-                  child: PageView(
-                    controller: controller,
-                    children: [
-                      Center(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset('assets/i1.jpg')),
+                  ),
+                  const Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text(
+                        "GitHub",
+                        style: TextStyle(fontSize: 28),
                       ),
-                      Center(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset('assets/i2.jpg')),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 22)),
+                        onPressed: () {
+                          launchURL(Uri(
+                            scheme: 'https',
+                            host: 'github.com',
+                            path: '/nooly1998/personal_webseite_builder/',
+                          ));
+                        },
+                        child: const Text("WebSite Builder Utils"),
                       ),
-                      Center(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.asset('assets/i3.jpg')),
-                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 22)),
+                        onPressed: () {
+                          launchURL(Uri(
+                            scheme: 'https',
+                            host: 'github.com',
+                            path: '/nooly1998/opengames_utils/',
+                          ));
+                        },
+                        child: const Text("Open Game Utils"),
+                      )
                     ],
                   ),
-                ),
-              ],
-            ),
+                  const Spacer(),
+                ],
+              ),
+              Container(height: 100),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  SizedBox(
+                    width: 100,
+                    child: FilledButton.tonal(
+                      onPressed: () {
+                        if (controller.hasClients) {
+                          controller.animateToPage(
+                            curpage == 0 ? curpage = 2 : curpage -= 1,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Colors.white),
+                      ),
+                      child: const Text(
+                        '上一个',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 1200,
+                    height: 800,
+                    child: PageView(
+                      controller: controller,
+                      children: [
+                        Center(
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset('assets/i1.jpg')),
+                        ),
+                        Center(
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset('assets/i2.jpg')),
+                        ),
+                        Center(
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset('assets/i3.jpg')),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 100,
+                    child: FilledButton.tonal(
+                      onPressed: () {
+                        if (controller.hasClients) {
+                          controller.animateToPage(
+                            curpage == 2 ? curpage = 0 : curpage += 1,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Colors.white),
+                      ),
+                      child: const Text(
+                        '下一个',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ],
           )),
     );
   }
