@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'utils.dart';
 import 'package:flutter/material.dart';
 import 'ffi.dart' if (dart.library.html) 'ffi_web.dart';
@@ -53,6 +55,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// class PageNoModel with ChangeNotifier {
+//   int _no = 0;
+//   int get no => _no;
+
+//   set no(int value) {
+//     _no = value;
+//     notifyListeners();
+//   }
+// }
+
 class _MyHomePageState extends State<MyHomePage> {
   // These futures belong to the state and are only initialized once,
   // in the initState method.
@@ -60,14 +72,28 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<bool> isRelease;
   late Future<String> hello;
   final PageController controller = PageController();
-  static int curpage = 0;
-
+  ValueNotifier<int> curpage = ValueNotifier<int>(0);
+  late Timer _timer;
   @override
   void initState() {
     super.initState();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
     hello = api.hello();
+    _setTimer();
+  }
+
+  Color _changeColor(int page) {
+    return curpage.value == page ? Colors.blue : Colors.grey;
+  }
+
+  _setTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
+      controller.animateToPage(
+          controller.page!.toInt() == 2 ? 0 : controller.page!.toInt() + 1,
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeOut);
+    });
   }
 
   @override
@@ -175,72 +201,67 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Spacer(),
                   SizedBox(
-                    width: 100,
-                    child: FilledButton.tonal(
-                      onPressed: () {
-                        if (controller.hasClients) {
-                          controller.animateToPage(
-                            curpage == 0 ? curpage = 2 : curpage -= 1,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.white),
-                      ),
-                      child: const Text(
-                        '上一个',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
                     width: 1200,
                     height: 800,
-                    child: PageView(
-                      controller: controller,
-                      children: [
-                        Center(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset('assets/i1.jpg')),
+                    child: Stack(children: [
+                      Container(
+                          child: NotificationListener<ScrollNotification>(
+                        onNotification: (notification) {
+                          var pageno = controller.page!.toInt();
+                          curpage.value = pageno;
+                          if (notification.depth == 0 &&
+                              notification is ScrollStartNotification) {
+                            if (notification.dragDetails != null) {
+                              _timer.cancel();
+                            }
+                          } else if (notification is ScrollEndNotification) {
+                            _timer.cancel();
+                            _setTimer();
+                          }
+                          return true;
+                        },
+                        child: PageView(
+                          controller: controller,
+                          children: [
+                            Center(child: Image.asset('assets/i1.jpg')),
+                            Center(child: Image.asset('assets/i2.jpg')),
+                            Center(child: Image.asset('assets/i3.jpg')),
+                          ],
                         ),
-                        Center(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset('assets/i2.jpg')),
-                        ),
-                        Center(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset('assets/i3.jpg')),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 100,
-                    child: FilledButton.tonal(
-                      onPressed: () {
-                        if (controller.hasClients) {
-                          controller.animateToPage(
-                            curpage == 2 ? curpage = 0 : curpage += 1,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.white),
-                      ),
-                      child: const Text(
-                        '下一个',
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
+                      )),
+                      Positioned(
+                          bottom: 90,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                              child: ValueListenableBuilder(
+                            valueListenable: curpage,
+                            builder: (context, value, child) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(3, (i) {
+                                  return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: _changeColor(i),
+                                      ),
+                                      child: RawMaterialButton(onPressed: () {
+                                        controller.animateToPage(
+                                          curpage.value = i,
+                                          duration:
+                                              const Duration(milliseconds: 400),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      }));
+                                }).toList(),
+                              );
+                            },
+                          )))
+                    ]),
                   ),
                   const Spacer(),
                 ],
