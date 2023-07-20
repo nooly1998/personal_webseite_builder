@@ -74,12 +74,14 @@ class _MyHomePageState extends State<MyHomePage> {
   final PageController controller = PageController();
   ValueNotifier<int> curpage = ValueNotifier<int>(0);
   late Timer _timer;
+  int _pageCounter = 0;
   @override
   void initState() {
     super.initState();
     platform = api.platform();
     isRelease = api.rustReleaseMode();
     hello = api.hello();
+    _pageCounter = 3;
     _setTimer();
   }
 
@@ -90,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
   _setTimer() {
     _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       controller.animateToPage(
-          controller.page!.toInt() == 2 ? 0 : controller.page!.toInt() + 1,
+          controller.page!.toInt() == (_pageCounter - 1)
+              ? 0
+              : controller.page!.toInt() + 1,
           duration: const Duration(milliseconds: 400),
           curve: Curves.easeOut);
     });
@@ -166,6 +170,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         "GitHub",
                         style: TextStyle(fontSize: 28),
                       ),
+                      FilledButton(
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) => const AlertDialog(
+                            title: Text("捐赠渠道(支付宝，微信)",
+                                style: TextStyle(fontSize: 22)),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Image(image: AssetImage('assets/zfb.jpg')),
+                                  Image(image: AssetImage('assets/wx.jpg'))
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "捐赠",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ),
                       TextButton(
                         style: TextButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 22)),
@@ -239,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context, value, child) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: List.generate(3, (i) {
+                                children: List.generate(_pageCounter, (i) {
                                   return Container(
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5),

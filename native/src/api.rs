@@ -61,9 +61,3 @@ pub fn rust_release_mode() -> bool {
 pub fn hello() -> String {
     format!("hello, here are flutter-rust app!")
 }
-
-// pub fn personal_file() -> Box<Vec<u8>> {
-//     let mut storage = FileStorage::new();
-//     storage.set_path("native/resource/个人简历202307.docx");
-//     storage.read_file()
-// }
