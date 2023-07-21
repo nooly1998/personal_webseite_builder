@@ -12,13 +12,8 @@ pub fn wire_rust_release_mode(port_: MessagePort) {
 }
 
 #[wasm_bindgen]
-pub fn wire_hello(port_: MessagePort) {
-    wire_hello_impl(port_)
-}
-
-#[wasm_bindgen]
-pub fn wire_personal_file(port_: MessagePort) {
-    wire_personal_file_impl(port_)
+pub fn wire_pages(port_: MessagePort) {
+    wire_pages_impl(port_)
 }
 
 // Section: allocate functions

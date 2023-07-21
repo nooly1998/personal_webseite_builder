@@ -12,13 +12,8 @@ pub extern "C" fn wire_rust_release_mode(port_: i64) {
 }
 
 #[no_mangle]
-pub extern "C" fn wire_hello(port_: i64) {
-    wire_hello_impl(port_)
-}
-
-#[no_mangle]
-pub extern "C" fn wire_personal_file(port_: i64) {
-    wire_personal_file_impl(port_)
+pub extern "C" fn wire_pages(port_: i64) {
+    wire_pages_impl(port_)
 }
 
 // Section: allocate functions

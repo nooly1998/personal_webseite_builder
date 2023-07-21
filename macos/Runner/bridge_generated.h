@@ -25,9 +25,7 @@ void wire_platform(int64_t port_);
 
 void wire_rust_release_mode(int64_t port_);
 
-void wire_hello(int64_t port_);
-
-void wire_personal_file(int64_t port_);
+void wire_pages(int64_t port_);
 
 void free_WireSyncReturn(WireSyncReturn ptr);
 
@@ -35,8 +33,7 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     int64_t dummy_var = 0;
     dummy_var ^= ((int64_t) (void*) wire_platform);
     dummy_var ^= ((int64_t) (void*) wire_rust_release_mode);
-    dummy_var ^= ((int64_t) (void*) wire_hello);
-    dummy_var ^= ((int64_t) (void*) wire_personal_file);
+    dummy_var ^= ((int64_t) (void*) wire_pages);
     dummy_var ^= ((int64_t) (void*) free_WireSyncReturn);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);
     dummy_var ^= ((int64_t) (void*) get_dart_object);
