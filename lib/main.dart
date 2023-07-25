@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rust_bridge_template/core.dart';
 import 'ffi.dart' if (dart.library.html) 'ffi_web.dart';
@@ -85,10 +87,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           drawer: lDrawer(pages, context),
           body: SingleChildScrollView(
-            child: Container(
-              child: Text("Tab1 content"),
+            child: Positioned(
+              left: 50,
+              top: 50,
+              child: FilledButton(
+                onPressed: () {},
+                child: const Text("Data"),
+              ),
             ),
-          )),
+          )
+          // body: SingleChildScrollView(
+          //   child: Container(
+          //     child: Text("Tab1 content"),
+          //   ),
+          // )),
+          ),
     );
   }
 }

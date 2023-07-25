@@ -9,7 +9,7 @@ enum DownloadStatus {
 
 Drawer lDrawer<T>(Future<T> value, BuildContext context) {
   return Drawer(
-    width: 100,
+    width: 150,
     child: FractionallySizedBox(
       widthFactor: 0.3,
       child: FutureBuilder<List<dynamic>>(
