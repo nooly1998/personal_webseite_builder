@@ -49,3 +49,6 @@ jniLibs
 
 Cargo.lock
 pubspec.lock
+linux/flutter/
+windows/flutter/
+macos/Flutter/

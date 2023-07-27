@@ -86,16 +86,34 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text(widget.title),
           ),
           drawer: lDrawer(pages, context),
-          body: SingleChildScrollView(
-            child: Positioned(
-              left: 50,
-              top: 50,
-              child: FilledButton(
-                onPressed: () {},
-                child: const Text("Data"),
+          body: Stack(children: [
+            Positioned(
+              left: 0,
+              top: 0,
+              child: Column(
+                children: [
+                  FilledButton(
+                    onPressed: () {},
+                    child: const Text("Data"),
+                  ),
+                ],
               ),
             ),
-          )
+            Positioned(
+                left: 60,
+                child: Container(
+                  child: SingleChildScrollView(
+                    child: const Text("添加组件"),
+                  ),
+                )),
+            Positioned(
+                right: 0,
+                width: 100,
+                height: 300,
+                child: ListView(
+                  children: [Text("组件1")],
+                ))
+          ])
           // body: SingleChildScrollView(
           //   child: Container(
           //     child: Text("Tab1 content"),
